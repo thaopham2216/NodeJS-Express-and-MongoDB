@@ -21,7 +21,7 @@ promotionRouter.route('/')
         res.end('Deleting all promotions');
     });
 
-promotionRouter.route('/promotionId')
+promotionRouter.route('/:promotionId')
     .all((req, res, next) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain');
