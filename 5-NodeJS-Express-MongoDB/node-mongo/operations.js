@@ -1,35 +1,21 @@
-//interaction between node and mongodb server  part 2 4 methods insert, find, remove and update 
-const assert = require('assert').strict;
 
-//4 parameter(db, document, collection, callback ), coll short for collection 
-exports.insertDocument = (db, document, collection, callback) => {
+//4 parameter(db, document, collection ), coll short for collection 
+exports.insertDocument = (db, document, collection) => {
     const coll = db.collection(collection);
-    coll.insertOne(document, (err, result) => {
-        assert.strictEqual(err, null);
-        callback(result);
-    });
+    return coll.insertOne(document); //(err, result) => {assert.strictEqual(err, null); callback(result); this whole thing is a call back if delete this call back insertOne will return a promise
 };
 
-exports.findDocuments = (db, collection, callback) => {
+exports.findDocuments = (db, collection) => {
     const coll = db.collection(collection);
-    coll.find().toArray((err, docs) => {
-        assert.strictEqual(err, null);
-        callback(docs);
-    });
+    return coll.find({}).toArray();
 };
 
-exports.removeDocument = (db, document, collection, callback) => {
+exports.removeDocument = (db, document, collection) => {
     const coll = db.collection(collection);
-    coll.deleteOne(document, (err, result) => {
-        assert.strictEqual(err, null);
-        callback(result);
-    });
+    return coll.deleteOne(document);
 };
 
-exports.updateDocument = (db, document, update, collection, callback) => {
+exports.updateDocument = (db, document, update, collection) => {
     const coll = db.collection(collection);
-    coll.updateOne(document, { $set: update }, null, (err, result) => {
-        assert.strictEqual(err, null);
-        callback(result);
-    });
+    return coll.updateOne(document, { $set: update }, null);
 };
