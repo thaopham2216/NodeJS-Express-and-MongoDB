@@ -44,6 +44,9 @@ function auth(req, res, next){
     err.status = 401;
     return next(err);
   }
+    //parse authorization header and validate username and password from authHeader
+  //put them in a new array where user name in index 0, pass index 1, 
+  //Buffer.from use to decode username and password 
   const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
   const user = auth[0];
   const pass = auth[1];
